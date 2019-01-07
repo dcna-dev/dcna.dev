@@ -1,0 +1,56 @@
+#This config file is only meant for Hugo Themes website, for testing purposes, refer to the other two.
+baseURL = "https://www.dcna.io/"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "DCNA.io"
+theme = "dream-plus"
+#themesDir = "../.."
+
+
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+pygmentsOptions = "linenos=table"
+
+disqusShortname = "dream-plus"
+
+enableRobotsTXT = true
+
+#Enable Hugo Emoji Conversion
+enableEmoji=true
+
+[params]
+	author = "Diego Cananea"
+	description = "Just a random blog for random stuff, mostly tech-related."
+	avatar = "perfil.png"
+	motto = "A keen maker, programmer and an Instructables author."
+	enableToc = true
+	enableShareCard = true
+
+	favicon = "/img/defaultFav.ico"
+
+  	#Background settings
+	enableColorBG= true
+
+	#Post-displaying Settings
+	enableTags = true
+	enableCategories = true
+
+	customCSS = ["https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css"]
+
+	#Cards or posts shown per page
+	itemsPerPage = 4
+
+	#Set whether you're hosting "cards" or "post"
+	contentType = "posts"
+
+	#Enable Twitter Emoji
+	twitterEmoji=true
+
+[social]
+	email = "diegocananea@gmail.com"
+	github = "dcna-io"
+	#stackoverflow = "9271608/utkarsh-verma"
+	#medium = "UtkarshVerma_"
+	twitter = "diegocananea"
+    linkedin = "dcna"
+	siteStartYear = 2019
