@@ -13,7 +13,7 @@ RUN set -x && \
   apk del wget
 RUN git clone --recursive https://github.com/dcna-io/dcna.io.git /site
 WORKDIR /site
-CMD /usr/bin/hugo && pwd && ls /site/public
+RUN /usr/bin/hugo
 
 
 FROM nginx:alpine
@@ -22,4 +22,4 @@ FROM nginx:alpine
 
 WORKDIR /var/www/site
 
-COPY --from=0 /site/public .
+COPY --from=0 /site/public /var/www/site 
