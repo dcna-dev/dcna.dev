@@ -1,0 +1,30 @@
+---
+- name: Installs new Docker version
+  hosts: all
+  user: root
+
+  tasks:
+  - name: Remove old Docker packages
+    dnf:
+      name: ['docker', 'docker-client', 'docker-client-latest', 'docker-common', 'docker-latest', 'docker-latest-logrotate', 'docker-logrotate', 
+'docker-selinux', 'docker-engine-selinux', 'docker-engine']
+      state: absent
+
+      - name: Add Docker-CE official repository
+    yum_repository:
+      name: docker-ce-stable
+      description: Docker-CE Repo
+      baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+      gpgcheck: yes
+      gpgkey: https://download.docker.com/linux/fedora/gpg
+
+  - name: Install Docker
+    dnf:
+      name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+      state: present
+
+  - name: Start Docker daemon
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
