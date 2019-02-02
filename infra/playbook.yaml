@@ -6,11 +6,11 @@
   tasks:
   - name: Remove old Docker packages
     dnf:
-      name: ['docker', 'docker-client', 'docker-client-latest', 'docker-common', 'docker-latest', 'docker-latest-logrotate', 'docker-logrotate', 
+      name: ['docker', 'docker-client', 'docker-client-latest', 'docker-common', 'docker-latest', 'docker-latest-logrotate', 'docker-logrotate',
 'docker-selinux', 'docker-engine-selinux', 'docker-engine']
       state: absent
 
-      - name: Add Docker-CE official repository
+  - name: Add Docker-CE official repository
     yum_repository:
       name: docker-ce-stable
       description: Docker-CE Repo

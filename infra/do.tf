@@ -18,18 +18,26 @@ resource "digitalocean_droplet" "dcna" {
   ssh_keys = ["${var.ssh_keys}"]
 
   provisioner "local-exec" {
-    command = "echo ${digitalocean_droplet.dcna.ipv4_address} ansible_python_interpreter=/usr/bin/python3 >> hosts.ini"
-    command = "ansible-playbook --private-key=${var.priv_key} -i hosts.ini playbook.yaml"
+    when = "destroy"
+    command = "rm hosts.ini"
+    on_failure = "continue"
+  }
+}
+
+resource "null_resource" "ansible" {
+  provisioner "local-exec" {
+    command = "sleep 10"
   }
 
   provisioner "local-exec" {
-    when = "destroy"
-    command = "rm -y hosts.ini"
+    command = "echo ${digitalocean_droplet.dcna.ipv4_address} ansible_python_interpreter=/usr/bin/python3 > hosts.ini"
   }
 
-
-
+  provisioner "local-exec" {
+    command = "ansible-playbook --private-key=${var.priv_key} -i hosts.ini playbook.yaml"
+  }
 }
+
 
 
 
