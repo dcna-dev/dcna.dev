@@ -1,8 +1,8 @@
 #This config file is only meant for Hugo Themes website, for testing purposes, refer to the other two.
-baseURL = "https://www.dcna.io/"
+baseURL = "https://dcna.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-title = "DCNA.io"
+title = "dcna.io"
 theme = "dream-plus"
 #themesDir = "../.."
 
@@ -26,7 +26,7 @@ enableEmoji=true
 	enableToc = true
 	enableShareCard = true
 
-	favicon = "/img/defaultFav.ico"
+	favicon = "favicon.ico"
 
   	#Background settings
 	enableColorBG= true
