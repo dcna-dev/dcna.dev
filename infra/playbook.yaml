@@ -18,13 +18,34 @@
       gpgcheck: yes
       gpgkey: https://download.docker.com/linux/fedora/gpg
 
-  - name: Install Docker
+  - name: Install Docker and git
     dnf:
-      name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+      name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git']
       state: present
+
+  - name: Install pre-requisites
+    pip:
+      name: 'docker'
 
   - name: Start Docker daemon
     systemd:
       name: docker
       state: started
       enabled: yes
+
+  - name: Cloning blog repo
+    git:
+      repo: 'https://github.com/dcna-io/dcna.io.git'
+      dest: '/opt/dcna'
+
+  - name: Build the docker image
+    docker_image:
+      path: '/opt/dcna'
+      name: 'dcna'
+
+  - name: Run the container
+    docker_container:
+      name: dcna.io
+      image: dcna
+      ports:
+        - "80:80"

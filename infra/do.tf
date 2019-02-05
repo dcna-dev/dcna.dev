@@ -24,9 +24,30 @@ resource "digitalocean_droplet" "dcna" {
   }
 }
 
+resource "digitalocean_firewall" "fw" {
+  name = "fw"
+  inbound_rule = [
+  {
+    protocol = "tcp"
+    port_range = "22"
+    source_addresses   = ["0.0.0.0/0", "::/0"]
+  },
+  {
+    protocol = "tcp"
+    port_range = "80"
+    source_addresses   = ["0.0.0.0/0", "::/0"]
+  },
+  {
+    protocol = "tcp"
+    port_range = "443"
+    source_addresses   = ["0.0.0.0/0", "::/0"]
+  }
+  ]
+}
+
 resource "null_resource" "ansible" {
   provisioner "local-exec" {
-    command = "sleep 10"
+    command = "sleep 15"
   }
 
   provisioner "local-exec" {
