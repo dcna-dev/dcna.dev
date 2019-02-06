@@ -1,0 +1,33 @@
+---
+# tasks file for certbot
+
+- name: Install certbot
+  dnf:
+    name: ['certbot','cronie']
+    state: present
+
+- name: Install certbot_dns_route53 python module
+  pip:
+    name: 'certbot_dns_route53'
+
+- name: Create AWS config directory
+  file:
+    path: ~/.aws
+    state: directory
+    mode: 0600
+
+- name: Copy AWS config file
+  copy:
+    src: "{{ path_aws_config }}"
+    dest: ~/.aws/config
+    mode: 0600
+
+- name: Execute certbot command to generate a wildcard ssl
+  shell: certbot certonly -d dcna.io -d *.dcna.io --dns-route53 -m diegocananea@gmail.com --agree-tos --non-interactive
+
+- name: Create cron entry for certbot renew
+  cron:
+    name: "renew letsencrypt"
+    special_time: monthly
+    job: 'certbot renew --dns-route53 --non-interactive --post-hook "sudo service nginx reload"'
+

@@ -55,7 +55,7 @@ resource "null_resource" "ansible" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook --private-key=${var.priv_key} -i hosts.ini playbook.yaml"
+    command = "ansible-playbook --private-key=${var.priv_key} -i hosts.ini site.yaml"
   }
 }
 

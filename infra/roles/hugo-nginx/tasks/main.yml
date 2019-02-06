@@ -1,0 +1,54 @@
+---
+# tasks file for docker
+
+- name: Cloning blog repo
+  git:
+    repo: 'https://github.com/dcna-io/dcna.io.git'
+    dest: '/opt/dcna'
+
+- name: Create nginx config directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/dcna/nginx
+    - /opt/dcna/nginx/conf.d
+
+- name: example copying file with owner and permissions
+  copy:
+    src: 'dcna.conf'
+    dest: '/opt/dcna/nginx/conf.d'
+
+- name: Build the docker image
+  docker_image:
+    path: '/opt/dcna'
+    name: 'dcna'
+
+- name: Run the container
+  docker_container:
+    name: dcna.io
+    image: dcna
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /opt/dcna/nginx/conf.d/:/etc/nginx/conf.d/
+      - /etc/letsencrypt/archive/dcna.io:/etc/letsencrypt/live/dcna.io
+
+- route53:
+      state: present
+      zone: dcna.io
+      record: dcna.io
+      type: A
+      value:
+        - {{ ansible_default_ipv4.address }}
+      wait: yes
+
+- route53:
+      state: present
+      zone: dcna.io
+      record: www.dcna.io
+      type: A
+      value:
+        - {{ ansible_default_ipv4.address }}
+      wait: yes

@@ -1,0 +1,23 @@
+---
+- name: Apply common configuration to all nodes
+  hosts: all
+  user: root
+
+  roles:
+    - common
+
+- name: Generate Let's Encryot wildcard certificate
+  hosts: all
+  user: root
+
+  roles:
+    - certbot
+
+
+- name: Clone the repository, build the docker image and runs it
+  hosts: all
+  user: root
+
+  roles:
+    - hugo-nginx
+
