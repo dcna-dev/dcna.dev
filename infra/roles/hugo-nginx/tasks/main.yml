@@ -35,20 +35,32 @@
       - /opt/dcna/nginx/conf.d/:/etc/nginx/conf.d/
       - /etc/letsencrypt/archive/dcna.io:/etc/letsencrypt/live/dcna.io
 
-- route53:
-      state: present
-      zone: dcna.io
-      record: dcna.io
-      type: A
-      value:
-        - {{ ansible_default_ipv4.address }}
-      wait: yes
+- name: Verify if the IP address has change
+  route53:
+    state: get
+    zone: dcna.io
+    record: dcna.io
+    type: A
+  register: rec
 
-- route53:
-      state: present
-      zone: dcna.io
-      record: www.dcna.io
-      type: A
-      value:
-        - {{ ansible_default_ipv4.address }}
-      wait: yes
+- name: Modify dcna.io DNS record if the IP address has changed
+  route53:
+    state: present
+    zone: dcna.io
+    when: ansible_default_ipv4.address == rec.set.value
+    record: dcna.io
+    type: A
+    value:
+      - {{ ansible_default_ipv4.address }}
+    wait: yes
+
+- name: Modify www.dcna.io DNS record if the IP address has changed
+  route53:
+    state: present
+    zone: dcna.io
+    when: ansible_default_ipv4.address == rec.set.value
+    record: www.dcna.io
+    type: A
+    value:
+      - {{ ansible_default_ipv4.address }}
+    wait: yes

@@ -20,9 +20,9 @@ enableEmoji=true
 
 [params]
 	author = "Diego Cananea"
-	description = "Just a random blog for random stuff, mostly tech-related."
+	description = "Infrastructure as code, distributed systems, systems architecture, public|private clouds and DevOps|Nerd culture."
 	avatar = "perfil.png"
-	motto = "A keen maker, programmer and an Instructables author."
+	motto = "SysAdmin|Systems Engineer with a passion for automating tasks, troubleshooting, and IT Infrastructure in general."
 	enableToc = true
 	enableShareCard = true
 
@@ -49,6 +49,7 @@ enableEmoji=true
 [social]
 	email = "diegocananea@gmail.com"
 	github = "dcna-io"
+    gitlab = "dcna"
 	#stackoverflow = "9271608/utkarsh-verma"
 	#medium = "UtkarshVerma_"
 	twitter = "diegocananea"
