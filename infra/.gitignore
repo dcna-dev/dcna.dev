@@ -2,3 +2,4 @@ hosts.ini
 *tfstate*
 .terraform
 *.retry
+.env
