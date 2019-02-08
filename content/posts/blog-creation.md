@@ -1,28 +1,25 @@
 ---
-title: "First post and the blog creation"
-description : "My experiences with this blog creation."
+title: "How create a blog/site with hugo"
+description : "What is hugo and how use it."
 weight: 1
 date: 2019-02-05T10:29:23+05:30
 tags:
-- digitalocean
-- terraform
+- blog
 - hugo
 categories:
-- infra as code
-- provision
-cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
+- web
+cover : "hugo-logo-wide_small.png"
 draft: true
----
-
-![GCI](https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-wide.png)Recently I've been participating in [Google Code-in](https://codein.withgoogle.com/) which is Google's initiative to introduce young minds to the concept of **FOSS**, that is **Free or Open-Source Softwares**. This post is for sharing my experiences with GCI, as the title suggests. So let's just get on it.
-
-It all began while I was returning from an outing on **5 December, 2017** and was searching the internet for [Google Science Fair](https://www.googlesciencefair.com/) to check if I could participate in it or not. When I searched it and scrolled down, I saw a link for **Google Code-in**. The very combination of the words *Google* and *Code* had raised my adrenaline levels and so I starting reading about it and after a few moments, I had decided to participate in it. Soon I had my father fill up the **Parental Consent** and I was ready to begin.
-
-Being a total beginner with this contest and with the concepts of **FOSS**, I had a lot to learn, and I was aware of that. So after a few days of jumping from one organization to the other, I was finally able to settle at [OpenWISP](https://www.openwisp.org). This was thankfully possible due to my chat on their [Gitter room](https://gitter.im/openwisp/general) with one of their mentors. It also gave me the confidence to proceed ahead with my skill-set and so I began doing the tasks provided by this organisation.
 
 ---
 
-# The Things I've Learnt:
+I had a blog, with this same domain, but I did not updated its content as I wanted. My oldest blog was a WordPress hosted in an EC2 instance and I configured all stack with Apache and Mysql. I ended that blog in 2017, but in the last months I have studied so hard and feel a necessary to share my experiences and studies.
+
+I was looking for new solutions to make this blog and discovered the frameworks for generating static site  like hugo and jekyll, the first is written in Golang and the last is in Ruby.
+
+---
+
+# What is hugo?
 Being a participant of GCI, I have learned a lot of things.Here are the few of the many things which I've learn't till date, thanks to **OpenWISP**(I'm still learning more :wink:):
 ## 1. Linux Command Line
 ![Screenshot of Lubntu](https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/linux.png)
