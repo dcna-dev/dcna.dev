@@ -3,7 +3,7 @@
 
 - name: Cloning blog repo
   git:
-    repo: 'https://github.com/dcna-io/dcna.io.git'
+    repo: 'https://github.com/dcna-io/dcna.dev.git'
     dest: '/opt/dcna'
 
 - name: Create nginx config directory
@@ -14,7 +14,7 @@
     - /opt/dcna/nginx
     - /opt/dcna/nginx/conf.d
 
-- name: example copying file with owner and permissions
+- name: Copying the conf file
   copy:
     src: 'dcna.conf'
     dest: '/opt/dcna/nginx/conf.d'
@@ -26,7 +26,7 @@
 
 - name: Run the container
   docker_container:
-    name: dcna.io
+    name: dcna.dev
     image: dcna
     ports:
       - "80:80"
@@ -35,32 +35,16 @@
       - /opt/dcna/nginx/conf.d/:/etc/nginx/conf.d/
       - /etc/letsencrypt/archive/dcna.io:/etc/letsencrypt/live/dcna.io
 
-- name: Verify if the IP address has change
-  route53:
-    state: get
-    zone: dcna.io
-    record: dcna.io
+- name: Create/Update the DNS record
+  gcp_dns_resource_record_set:
+    name: dcna.dev.
+    managed_zone: dcna
     type: A
-  register: rec
-
-- name: Modify dcna.io DNS record if the IP address has changed
-  route53:
+    ttl: 600
+    target:
+    - {{ ansible_default_ipv4.address }}
+    project: "{{ gcp_project }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ gcp_auth }}"
     state: present
-    zone: dcna.io
-    when: ansible_default_ipv4.address == rec.set.value
-    record: dcna.io
-    type: A
-    value:
-      - {{ ansible_default_ipv4.address }}
-    wait: yes
 
-- name: Modify www.dcna.io DNS record if the IP address has changed
-  route53:
-    state: present
-    zone: dcna.io
-    when: ansible_default_ipv4.address == rec.set.value
-    record: www.dcna.io
-    type: A
-    value:
-      - {{ ansible_default_ipv4.address }}
-    wait: yes

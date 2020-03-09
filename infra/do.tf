@@ -12,7 +12,7 @@ provider "digitalocean" {
 # Create a VM to host dcna.io container
 resource "digitalocean_droplet" "dcna" {
   image  = "fedora-28-x64"
-  name   = "dcna-io"
+  name   = "dcna-dev"
   region = "nyc1"
   size   = "s-1vcpu-1gb"
   ssh_keys = ["${var.ssh_keys}"]

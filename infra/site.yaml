@@ -6,7 +6,7 @@
   roles:
     - common
 
-- name: Generate Let's Encryot wildcard certificate
+- name: Generate Let's Encrypt wildcard certificate
   hosts: all
   user: root
 
